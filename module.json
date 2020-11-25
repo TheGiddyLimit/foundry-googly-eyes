@@ -1,0 +1,21 @@
+{
+	"name": "googly-eyes",
+	"title": "Googly Eyes",
+	"description": "Google Eyes",
+	"version": "0.1.0",
+	"author": "Giddy",
+	"keywords": [
+		"visuals"
+	],
+	"readme": "README.md",
+	"license": "MIT",
+	"url": "https://www.patreon.com/Giddy5e",
+	"minimumCoreVersion": "0.7.7",
+	"compatibleCoreVersion": "0.7.7",
+	"esmodules": [
+		"./js/GooglyEyes.js"
+	],
+	"styles": [
+		"./css/main.css"
+	]
+}

@@ -1,0 +1,18 @@
+.ggly__btn {
+	--sz-button: 24px;
+
+	position: fixed;
+	top: 7px;
+	right: 310px;
+	z-index: 1;
+	border: 0;
+	background: url('../media/googly-eye.png') no-repeat;
+	background-size: var(--sz-button) var(--sz-button);
+	opacity: 0.5;
+	width: var(--sz-button);
+	height: var(--sz-button);
+}
+
+.ggly__btn--active {
+	opacity: 1;
+}
