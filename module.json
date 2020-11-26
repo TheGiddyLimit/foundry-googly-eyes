@@ -2,7 +2,7 @@
 	"name": "googly-eyes",
 	"title": "Googly Eyes",
 	"description": "Google Eyes",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"author": "Giddy",
 	"keywords": [
 		"visuals"
@@ -10,8 +10,8 @@
 	"readme": "README.md",
 	"license": "MIT",
 	"url": "https://www.patreon.com/Giddy5e",
-	"manifest": "https://raw.githubusercontent.com/TheGiddyLimit/foundry-goggly-eyes/master/module.json",
-	"download": "https://github.com/TheGiddyLimit/foundry-goggly-eyes/archive/v0.1.0.zip",
+	"manifest": "https://raw.githubusercontent.com/TheGiddyLimit/foundry-googly-eyes/master/module.json",
+	"download": "https://github.com/TheGiddyLimit/foundry-googly-eyes/archive/v0.1.1.zip",
 	"minimumCoreVersion": "0.7.7",
 	"compatibleCoreVersion": "0.7.7",
 	"esmodules": [
