@@ -2,7 +2,7 @@
 	"name": "googly-eyes",
 	"title": "Googly Eyes",
 	"description": "Google Eyes",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"author": "Giddy",
 	"keywords": [
 		"visuals"
@@ -11,9 +11,14 @@
 	"license": "MIT",
 	"url": "https://www.patreon.com/Giddy5e",
 	"manifest": "https://raw.githubusercontent.com/TheGiddyLimit/foundry-googly-eyes/master/module.json",
-	"download": "https://github.com/TheGiddyLimit/foundry-googly-eyes/archive/v0.1.1.zip",
-	"minimumCoreVersion": "0.7.7",
-	"compatibleCoreVersion": "0.7.7",
+	"download": "https://github.com/TheGiddyLimit/foundry-googly-eyes/archive/v0.2.0.zip",
+	"minimumCoreVersion": "0.8.6",
+	"compatibleCoreVersion": "0.8.9",
+	"dependencies": [
+		{
+			"name": "lib-wrapper"
+		}
+	],
 	"esmodules": [
 		"./js/GooglyEyes.js"
 	],

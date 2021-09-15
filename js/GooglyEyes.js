@@ -1,12 +1,7 @@
 class GooglyEyes {
 	static async pInit () {
-		await this._pInitTexture();
 		this._initToggle();
 		this._initTokenMods();
-	}
-
-	static async _pInitTexture () {
-		GooglyEyes._TEXTURE = await loadTexture(`modules/${GooglyEyes._MODULE_NAME}/media/googly-eye.png`);
 	}
 
 	static _initToggle () {
@@ -19,36 +14,55 @@ class GooglyEyes {
 	}
 
 	static _initTokenMods () {
-		const cachedRefresh = Token.prototype.refresh;
-		const cachedClickLeft = Token.prototype._onClickLeft;
-		const cachedClickRight = Token.prototype._onClickRight;
-		const cachedClickLeft2 = Token.prototype._onClickLeft2;
-		const cachedClickRight2 = Token.prototype._onClickRight2;
+		libWrapper.register(
+			GooglyEyes._MODULE_NAME,
+			"Token.prototype.refresh",
+			function (fn, ...args) {
+				GooglyEyes._doRender(this);
+				return fn(...args);
+			},
+			"WRAPPER",
+		);
 
-		Token.prototype.refresh = function (...args) {
-			GooglyEyes._doRender(this);
-			return cachedRefresh.bind(this)(...args);
-		};
+		libWrapper.register(
+			GooglyEyes._MODULE_NAME,
+			"Token.prototype._onClickLeft",
+			function (fn, ...args) {
+				if (GooglyEyes._doHandleClickLeft(this, ...args)) return false;
+				return fn(...args);
+			},
+			"MIXED",
+		);
 
-		Token.prototype._onClickLeft = function (...args) {
-			if (GooglyEyes._doHandleClickLeft(this, ...args)) return false;
-			return cachedClickLeft.bind(this)(...args);
-		};
+		libWrapper.register(
+			GooglyEyes._MODULE_NAME,
+			"Token.prototype._onClickLeft2",
+			function (fn, ...args) {
+				if (GooglyEyes._doHandleClickLeft(this, ...args)) return false;
+				return fn(...args);
+			},
+			"MIXED",
+		);
 
-		Token.prototype._onClickLeft2 = function (...args) {
-			if (GooglyEyes._doHandleClickLeft(this, ...args)) return false;
-			return cachedClickLeft2.bind(this)(...args);
-		};
+		libWrapper.register(
+			GooglyEyes._MODULE_NAME,
+			"Token.prototype._onClickRight",
+			function (fn, ...args) {
+				if (GooglyEyes._doHandleClickRight(this, ...args)) return false;
+				return fn(...args);
+			},
+			"MIXED",
+		);
 
-		Token.prototype._onClickRight = function (...args) {
-			if (GooglyEyes._doHandleClickRight(this, ...args)) return false;
-			return cachedClickRight.bind(this)(...args);
-		};
-
-		Token.prototype._onClickRight2 = function (...args) {
-			if (GooglyEyes._doHandleClickRight(this, ...args)) return false;
-			return cachedClickRight2.bind(this)(...args);
-		};
+		libWrapper.register(
+			GooglyEyes._MODULE_NAME,
+			"Token.prototype._onClickRight2",
+			function (fn, ...args) {
+				if (GooglyEyes._doHandleClickRight(this, ...args)) return false;
+				return fn(...args);
+			},
+			"MIXED",
+		);
 
 		this._doTriggerExistingTokens();
 	}
@@ -83,7 +97,7 @@ class GooglyEyes {
 				if (sptEye && sptEye.parent) return;
 				if (sptEye && !sptEye.parent) token.removeChild(sptEye);
 
-				sptEye = new PIXI.Sprite(GooglyEyes._TEXTURE);
+				sptEye = PIXI.Sprite.from(GooglyEyes._TEXTURE_PATH);
 
 				sptEye.anchor.set(0.5, 0.5);
 				sptEye.position.set(pt.x, pt.y);
@@ -174,9 +188,9 @@ class GooglyEyes {
 		return JSON.parse(JSON.stringify(token.data.flags?.[GooglyEyes._MODULE_NAME]?.points || []));
 	}
 }
-GooglyEyes._TEXTURE = null;
 GooglyEyes._IS_ACTIVE = false;
 GooglyEyes._MODULE_NAME = "googly-eyes";
+GooglyEyes._TEXTURE_PATH = `modules/${GooglyEyes._MODULE_NAME}/media/googly-eye.png`;
 
 Hooks.on("ready", () => {
 	GooglyEyes.pInit();
